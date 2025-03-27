@@ -1,0 +1,1 @@
+MI(loan.principal, loan.rate, loan.tenure));
