@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define FILENAME "students.txt"
-
 struct Student {
     int id;
     char name[50];
@@ -14,11 +12,8 @@ struct Student {
 
 void addStudent() {
     struct Student s;
-    FILE *file = fopen(FILENAME, "a");
-    if (file == NULL) {
-        printf("Error opening file!\n");
-        return;
-    }
+    FILE *file = fopen("students.txt", "a");
+    
     printf("Enter Student ID: ");
     scanf("%d", &s.id);
     printf("Enter Name: ");
@@ -38,7 +33,7 @@ void addStudent() {
 
 void viewStudents() {
     struct Student s;
-    FILE *file = fopen(FILENAME, "r");
+    FILE *file = fopen("student.txt", "r");
     if (file == NULL) {
         printf("No records found!\n");
         return;
@@ -54,7 +49,7 @@ void viewStudents() {
 void searchStudent() {
     struct Student s;
     int id, found = 0;
-    FILE *file = fopen(FILENAME, "r");
+    FILE *file = fopen("students.txt", "r");
     if (file == NULL) {
         printf("No records found!\n");
         return;
@@ -76,7 +71,7 @@ void searchStudent() {
 void updateStudent() {
     struct Student s;
     int id, found = 0;
-    FILE *file = fopen(FILENAME, "r");
+    FILE *file = fopen("students.txt", "r");
     FILE *temp = fopen("temp.txt", "w");
     if (file == NULL || temp == NULL) {
         printf("Error opening file!\n");
@@ -100,8 +95,8 @@ void updateStudent() {
     }
     fclose(file);
     fclose(temp);
-    remove(FILENAME);
-    rename("temp.txt", FILENAME);
+    remove("students.txt");
+    rename("temp.txt", "students.txt");
     if (found)
         printf("Student updated successfully!\n");
     else
@@ -112,7 +107,7 @@ void updateStudent() {
 void deleteStudent() {
     struct Student s;
     int id, found = 0;
-    FILE *file = fopen(FILENAME, "r");
+    FILE *file = fopen("students.txt", "r");
     FILE *temp = fopen("temp.txt", "w");
     if (file == NULL || temp == NULL) {
         printf("Error opening file!\n");
@@ -129,8 +124,8 @@ void deleteStudent() {
     }
     fclose(file);
     fclose(temp);
-    remove(FILENAME);
-    rename("temp.txt", FILENAME);
+    remove("students.txt");
+    rename("temp.txt", "students.txt");
     if (found)
         printf("Student deleted successfully!\n");
     else
